@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[official website Dariush Nasirpour]]></title>
+  <link href="http://nasirpour.info/atom.xml" rel="self"/>
+  <link href="http://nasirpour.info/"/>
+  <updated>2015-02-07T09:29:30-05:00</updated>
+  <id>http://nasirpour.info/</id>
+  <author>
+    <name><![CDATA[Net.Edit0r]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Salam Kiri]]></title>
+    <link href="http://nasirpour.info/blog/salam-kiri/"/>
+    <updated>2015-02-07T07:38:21-05:00</updated>
+    <id>http://nasirpour.info/blog/salam-kiri</id>
+    <content type="html"><![CDATA[<p>KIRI</p>
+]]></content>
+  </entry>
+  
+</feed>
