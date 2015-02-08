@@ -11,3 +11,11 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 .serial li, .serial ol {
 	display:inline;
 }
+
+.about {
+    color: #555;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
