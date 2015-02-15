@@ -19,3 +19,5 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     margin-bottom: 30px;
     margin-top: 40px;
 }
+
+div.papers{margin-top:30px}div.papers div{line-height:2em;width:100%}div.papers div:nth-child(even){background:#eee}div.papers div:nth-child(odd){background:#fff}div.papers div span.p{font-size:16px;line-height:1em;font-weight:bold;margin-left:10px}div.papers div span.v{float:right;margin-right:10px;font-size:14px}.writing-info{font-size:18px;margin-left:0;margin-top:20px}div.standalone{margin:20px}
