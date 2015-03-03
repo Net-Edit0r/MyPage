@@ -136,17 +136,12 @@ It really depends, as vBulletin is a highly configurable piece of software, you 
 
 <p>At first glance, we can tell that these preg_replace() calls aren’t anything good, particularly for us as an attacker can control $replacewith‘s content – with which he could craft a payload that matches any of these regular expressions to insert what looks like PHP code in the template!</p>
 
-<p>We could confirm our thought by analysing the vbseo_modify_template() function which essentially just replaces the specified snippet of code in vBulletin’s template cache.</p>
-
-<p>So, to inject PHP code, an attacker would have to insert something like this in the referrer field (making it very easy to flag by looking at your HTTP server’s logs):</p>
+<p>We could confirm our thought by analysing the vbseo_modify_template() function which essentially just replaces the specified snippet of code in vBulletin’s template cache.
+So, to inject PHP code, an attacker would have to insert something like this in the referrer field (making it very easy to flag by looking at your HTTP server’s logs):</p>
 
 <p>Patch as soon as possible!</p>
 
-<p>Video proof:</p>
-
-<div class="embed-video-container"><iframe src="//www.youtube.com/embed/anzgYpKMVHw" allowfullscreen></iframe></div>
-
-
+<h4>Exploit Reported</h4>
 
 
 <figure class='code'><figcaption><span>CVE: 2014-9463</span><a href='http://www.exploit-db.com/exploits/36232/'>Exploit-DB </a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -237,6 +232,21 @@ It really depends, as vBulletin is a highly configurable piece of software, you 
 </span><span class='line'><span class="err">################################################################################################################</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+
+
+<h4>Video proof:</h4>
+
+
+<div class="embed-video-container"><iframe src="//www.youtube.com/embed/anzgYpKMVHw" allowfullscreen></iframe></div>
+
+
+
+
+<h4>Screenshot after execute exploit</h4>
+
+
+<p><img src="http://nasirpour.info/file/other/vuln/vul.jpg"></p>
 </div>
   
   
