@@ -8,14 +8,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 	max-width:400px;
 	text-align:right;
 }
-.serial li {
+.serial li, .serial ol {
 	display:inline;
-}
-
-.serial ol {
-	display:inline;
-	list-style-type: decimal;
-    margin-left: 5em;
 }
 
 .about {
@@ -32,4 +26,22 @@ div.papers{margin-top:30px}div.papers div{line-height:2em;width:100%}div.papers 
   float: right;
   margin: 5px 0 6px 10px;
   margin-top: -1px;
+}
+
+.embed-video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16/9 ratio */
+    padding-top: 30px; /* IE6 workaround*/
+    height: 0;
+    overflow: hidden;
+}
+
+.embed-video-container iframe,
+.embed-video-container object,
+.embed-video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
