@@ -47,5 +47,6 @@ div.papers{margin-top:30px}div.papers div{line-height:2em;width:100%}div.papers 
 }
 
 .entry-date {
-  margin-bottom: 5em;
+  margin-bottom: 1.5em;
+  padding-top:2em
 }
