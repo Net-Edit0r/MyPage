@@ -113,7 +113,7 @@
 
 <time class='entry-date' datetime='2015-03-03T00:00:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
         
-         | <a href="/blog/vbulletin-vbseo-4-dot-x-x-vulnerability-leads-to-remote-code-execution/#disqus_thread">Comments</a>
+         | <a href="/blog/Disqus-comment-spamming-tool/#disqus_thread">Comments</a>
         
         
       </p>
@@ -130,26 +130,11 @@ The vulnerable snippet of code executes upon loading vBulletin’s memberinfo_vi
 <h3>Technical details</h3>
 
 
-<p>For some reasons, vBSEO will insert user-provided referer link into the visitormessage template:</p>
-
-<p><img src="http://nasirpour.info/file/other/vuln/vBSEO-vb.png"></p>
-
-<p>As you can see at lines 653 and 658, it does so by passing the $permalinkurl variable to the vbseo_modify_template34() function, which by itself doesn’t look that bad, beside presenting an obvious XSS vulnerability (the variable is not sanitized before being put in there).</p>
-
-<p>That said, things gets a little bit uglier when having a look at vbseo_modify_template34()‘s code:</p>
-
-<p><img src="http://nasirpour.info/file/other/vuln/vBSEO-I2.png"></p>
-
-<p>At first glance, we can tell that these preg_replace() calls aren’t anything good, particularly for us as an attacker can control $replacewith‘s content – with which he could craft a payload that matches any of these regular expressions to insert what looks like PHP code in the template!</p>
-
-<p>We could confirm our thought by analysing the vbseo_modify_template() function which essentially just replaces the specified snippet of code in vBulletin’s template cache.
-So, to inject PHP code, an attacker would have to insert something like this in the referrer field (making it very easy to flag by looking at your HTTP server’s logs):</p>
-
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/vbulletin-vbseo-4-dot-x-x-vulnerability-leads-to-remote-code-execution/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/Disqus-comment-spamming-tool/">Read on &rarr;</a>
     </footer>
   
 
