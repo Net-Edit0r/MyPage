@@ -129,7 +129,38 @@ The vulnerable snippet of code executes upon loading vBulletin’s memberinfo_vi
 
 <h3>Technical details</h3>
 
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">#################################################################################################################</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1"><?php
+//Coded By Dariush Nasirpour
+$loppping = 1;
+while ($loppping <= 10000) {  
+$massagearray = array("Massage1", "Massage2", "Massage3", "Massage4");
+
+foreach ($massagearray as $massage) {
+    $spam = curl_init();                 
+    $url = "https://disqus.com/api/3.0/posts/create.json"; 
+       $headers = array();
+       $headers[] = 'Host: disqus.com';
+       $headers[] = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8';
+       $headers[] = 'Accept-Language: en-US,en;q=0.5';
+       $headers[] = 'Accept-Encoding: gzip, deflate';
+       $headers[] = 'Content-Type: application/x-www-form-urlencoded; spamarset=UTF-8';
+       $headers[] = 'X-Requested-With: XMLHttpRequest';
+       $headers[] = 'Cookie: disqus_unique=2kglrci2vmt7ni; __utma=40641725.1273496447.1425738106.1425738106.1425738106.1; __utmz=40641725.1425738106.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmc=40641725; _cb_ls=1; _spamartbeat2=Ca4V9aZC4VmeKd08.1425725115637.1425737960160.1; csrftoken=iXhUjuMFqXbp7MQHBjjKZ6Al528DU2It; mp_17b27902cd9da8972af8a3c43850fa5f_mixpanel=%7B%22distinct_id%22%3A%20%2214bf3d71a7d60b-01b0e9919c5afc8-45574336-15f900-14bf3d71a7e586%22%7D; sessionid=7e9ece6e-c4cd-11e4-8ac9-002590f30436; __jid=59vjl1a1hi25fc; __utmb=40641725.3.9.1425738314944; disqusauth="1|dariushnasirpour|0|1|0||147368477|//a.disquscdn.com/1425664697/images/noavatar32.png|1"; mp_3ad8df9f28f928f3f970501b99cc717c_mixpanel=%7B%22distinct_id%22%3A%20%2214bf3d681ba99-0ec07c875f63e3-45574336-15f900-14bf3d681bb302%22%2C%22%24initial_referrer%22%3A%20%22%24direct%22%2C%22%24initial_referring_domain%22%3A%20%22%24direct%22%7D; _spamartbeat4=t=BXPlGvsmdfUD3EvGuDIaRHfCb6kCq&E=0&x=0&c=0.01&y=1281&w=481';
+    curl_setopt($spam, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($spam, CURLOPT_URL,$url);
+    curl_setopt($spam, CURLOPT_POST, true);
+    curl_setopt($spam, CURLOPT_POSTFIELDS, "thread=3575197749&message=$massage&api_key=E8Uh5l5fHZ6gD8U3KycjAIAk46f68Zw7C6eW8WSjZvCLXebZ7p0r1yrYDrLilk2F");
+    curl_setopt($spam, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($spam, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($spam, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($spam, CURLOPT_HEADER, 1);
+    $output = curl_exec ($spam);
+    curl_close ($spam); 
+    var_dump($output);
+    }
+}
+?>
+</span>
 
 
 
