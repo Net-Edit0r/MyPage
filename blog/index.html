@@ -129,9 +129,9 @@ The vulnerable snippet of code executes upon loading vBulletin’s memberinfo_vi
 
 <h3>Technical details</h3>
 
-<p></p><pre><code class="lang-auto"><?php
+<p></p><pre><code class="lang-auto">&lt;?php
 $loppping = 1;
-while ($loppping <= 10000) {  
+while ($loppping &lt;= 10000) {  
 $massagearray = array("Massage1", "Massage2", "Massage3", "Massage4");
 
 foreach ($massagearray as $massage) {
@@ -159,9 +159,10 @@ foreach ($massagearray as $massage) {
     var_dump($output);
     }
 }
-?> 
+?&gt; 
 </code></pre>
   
+
 
     </article>
     <article>
