@@ -136,6 +136,40 @@ ns1,"ns2","ns3","ns4","primary","host1","host2","masterdns","slavedns"
 "dns1","dns2","master","slave","node1","node2"
 </code></pre>
 
+<pre><code class="hljs-tag">
+
+C:\Users\root>ping cafeigapp.com
+
+Pinging cafeigapp.com [172.64.197.10] with 32 bytes of data:
+Reply from 172.64.197.10: bytes=32 time=153ms TTL=60
+Reply from 172.64.197.10: bytes=32 time=150ms TTL=60
+Reply from 172.64.197.10: bytes=32 time=149ms TTL=60
+Reply from 172.64.197.10: bytes=32 time=155ms TTL=60
+
+Ping statistics for 172.64.197.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 149ms, Maximum = 155ms, Average = 151ms
+</code></pre>
+
+
+<pre><code class="hljs-tag">
+Enter your domain: cafeigapp.com
+Starting...
+
+[+] Open        ns1.cafeigapp.com                                 53    144.76.174.208
+[+] Open        ns1.cafeigapp.com                                 80    144.76.174.208
+[+] Open        ns2.cafeigapp.com                                 53    144.76.174.208
+[+] Open        ns2.cafeigapp.com                                 80    144.76.174.208
+[-] Hostname could not be resolved.
+[-] Hostname could not be resolved.
+[-] Hostname could not be resolved.
+[-] Hostname could not be resolved.
+
+[*] Finished!
+</code></pre>
+
+
 <h3>Cloudflare Bypasser Tools</h3>
 
 <p></p><pre><code class="hljs-tag">
